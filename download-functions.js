@@ -7,13 +7,13 @@ async function downloadaudio(url){
         stream.on("info", (info) => {    
             stream.pipe(fs.createWriteStream("./Downloads/"+(info.videoDetails.title).replace(/[^a-z0-9]/gi, '_').toLowerCase()+".wav"));
             console.log(info.videoDetails.title+" was downloaded"); 
-        });
+        }).on("error",(error)=>{
+            console.log(error)
+        })
     } catch {
         console.log("Something went wrong while downloading an audio file, make sure you specified a valid URL")
     }
-    return null;
 }
-
 
 function downloadvideo(url){
     try {
@@ -21,11 +21,12 @@ function downloadvideo(url){
         stream.on("info", (info) => {    
             stream.pipe(fs.createWriteStream("./Downloads/"+(info.videoDetails.title).replace(/[^a-z0-9]/gi, '-').toLowerCase()+".mp4"));
             console.log(info.videoDetails.title+" was downloaded"); 
-        });
+        }).on("error",(error)=>{
+            console.log(error)
+        })
     } catch {
         console.log("Something went wrong while downloading a video file, make sure you specified a valid URL")
     }
-    return null;
 }
 
 
