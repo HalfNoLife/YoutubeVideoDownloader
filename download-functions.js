@@ -1,28 +1,36 @@
 const ytdl=require("ytdl-core");
 const fs=require("fs");
 const ytpl = require('ytpl');
-async function downloadaudio(url){
+async function downloadAudio(url){
     try{
         var stream =ytdl(url,{filter:"audioonly"})
         stream.on("info", (info) => {    
             stream.pipe(fs.createWriteStream("./Downloads/"+(info.videoDetails.title).replace(/[^a-z0-9]/gi, '_').toLowerCase()+".wav"));
             console.log(info.videoDetails.title+" was downloaded"); 
         }).on("error",(error)=>{
-            console.log(error)
+            if(error.statusCode==403){
+                console.log("Couldn't access a video")
+            } else {
+                console.log(error)
+            }
         })
     } catch {
         console.log("Something went wrong while downloading an audio file, make sure you specified a valid URL")
     }
 }
 
-function downloadvideo(url){
+function downloadVideo(url){
     try {
         var stream =ytdl(url)
         stream.on("info", (info) => {    
             stream.pipe(fs.createWriteStream("./Downloads/"+(info.videoDetails.title).replace(/[^a-z0-9]/gi, '-').toLowerCase()+".mp4"));
             console.log(info.videoDetails.title+" was downloaded"); 
         }).on("error",(error)=>{
-            console.log(error)
+            if(error.statusCode==403){
+                console.log("Couldn't access a video")
+            } else {
+                console.log(error)
+            }
         })
     } catch {
         console.log("Something went wrong while downloading a video file, make sure you specified a valid URL")
@@ -30,7 +38,7 @@ function downloadvideo(url){
 }
 
 
-function downloadvideoplaylist(url){
+function downloadVideoPlaylist(url){
     if(url.startsWith("https://www.youtube.com/playlist?list=")){
         id=""
         for(i=0;i<url.length-38;i++){
@@ -42,7 +50,7 @@ function downloadvideoplaylist(url){
     results=[]
     ytpl(id).then(playlist => {
         for(i=0;i<playlist.items.length;i++){
-            downloadvideo("https://www.youtube.com/watch?v="+playlist.items[i].id)
+            downloadVideo("https://www.youtube.com/watch?v="+playlist.items[i].id)
             console.log("https://www.youtube.com/watch?v="+playlist.items[i].id)
         }
       }).catch(err => {
@@ -51,7 +59,7 @@ function downloadvideoplaylist(url){
 }
 
 
-function downloadaudioplaylist(url){
+function downloadAudioPlaylist(url){
     if(url.startsWith("https://www.youtube.com/playlist?list=")){
         id=""
         for(i=0;i<url.length-38;i++){
@@ -63,7 +71,7 @@ function downloadaudioplaylist(url){
     results=[]
     ytpl(id,{limit:Infinity}).then(playlist => {
         for(i=0;i<playlist.items.length;i++){
-            downloadaudio("https://www.youtube.com/watch?v="+playlist.items[i].id)
+            downloadAudio("https://www.youtube.com/watch?v="+playlist.items[i].id)
             console.log("https://www.youtube.com/watch?v="+playlist.items[i].id)
         }
       }).catch(err => {
@@ -72,4 +80,4 @@ function downloadaudioplaylist(url){
 }
 
 
-module.exports= {downloadaudio,downloadvideo,downloadaudioplaylist,downloadvideoplaylist}
+module.exports= {downloadAudio,downloadVideo,downloadAudioPlaylist,downloadVideoPlaylist}

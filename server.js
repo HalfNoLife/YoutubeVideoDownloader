@@ -12,15 +12,15 @@ app.post('/index', function(req, res) {
     res.sendFile('public/index.html', {root: __dirname })
     if (req.body.audiodl){
         if (req.body.playlistdl){
-            dl.downloadaudioplaylist(req.body.mytext)
+            dl.downloadAudioPlaylist(req.body.mytext)
         } else {
-            dl.downloadaudio(req.body.mytext)
+            dl.downloadAudio(req.body.mytext)
         }
     } else {
         if (req.body.playlistdl){
-            dl.downloadvideoplaylist(req.body.mytext)
+            dl.downloadVideoPlaylist(req.body.mytext)
         } else {
-            dl.downloadvideo(req.body.mytext)
+            dl.downloadVideo(req.body.mytext)
         }
     };
 });
