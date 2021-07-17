@@ -59,7 +59,7 @@ function downloadaudioplaylist(url){
     } else {
         console.log("The url should start with 'https://www.youtube.com/playlist?list='")
     }
-    let results=[]
+    results=[]
     ytpl(id,{limit:Infinity}).then(playlist => {
         for(i=0;i<playlist.items.length;i++){
             downloadaudio("https://www.youtube.com/watch?v="+playlist.items[i].id)
