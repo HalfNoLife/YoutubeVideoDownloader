@@ -2,14 +2,7 @@
 A tool to download youtube videos/playlist in both audio and video
 
 # Dependencies
-To install them make sure you have npm (node packet manager), open a command prompt and go to the path of the two files, them use
--"npm -i ytdl-core"
--"npm -i ytpl"
--"npm -i ytdl-core"
--"npm -i express"
--"npm -i body-parser"
--"npm -i fs"
-A folder called "node_modules" containing all the modules you need should have been created.
+To install them just go to the path where you cloned the project and run "npm install".
 
 # How to use
 Open a command prompt go to the path of server.js then use "node server.js".
