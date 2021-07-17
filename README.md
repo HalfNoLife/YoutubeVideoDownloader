@@ -10,6 +10,3 @@ Go to your internet browser and go to http://localhost:3000/index.
 
 Note: if you want to download videos/audios from a playlist it needs to be a public one. 
 The link must look like this: https://www.youtube.com/playlist?list=PL2kGismkuJA0zLnsi_FYhVPNIpdrLhmR-
-
-Note 2: For the moment you can only download 100 videos from a playlist at once(the first 100).
-
