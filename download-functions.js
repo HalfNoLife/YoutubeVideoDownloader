@@ -39,13 +39,14 @@ function downloadVideo(url){
 
 
 function downloadVideoPlaylist(url){
+    let id=""
     if(url.startsWith("https://www.youtube.com/playlist?list=")){
-        id=""
         for(i=0;i<url.length-38;i++){
             id=id+url[i+38]
         }
     } else {
         console.log("The url should start with 'https://www.youtube.com/playlist?list='")
+        return
     }
     results=[]
     ytpl(id).then(playlist => {
@@ -60,13 +61,14 @@ function downloadVideoPlaylist(url){
 
 
 function downloadAudioPlaylist(url){
+    let id=""
     if(url.startsWith("https://www.youtube.com/playlist?list=")){
-        id=""
         for(i=0;i<url.length-38;i++){
             id=id+url[i+38]
         }
     } else {
         console.log("The url should start with 'https://www.youtube.com/playlist?list='")
+        return
     }
     results=[]
     ytpl(id,{limit:Infinity}).then(playlist => {
